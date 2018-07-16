@@ -1,0 +1,16 @@
+{
+  "name": "Tiny-Lit Hacker News",
+  "short_name": "TinyLit HN",
+  "description": "Hacker News readers as Progressive Web Apps",
+  "theme_color": "#F4751E",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+      {
+          "src": "logo.png",
+          "type": "image/png",
+          "sizes": "512x512"
+      }
+  ]
+}

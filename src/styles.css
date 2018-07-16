@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+a,
+body {
+    font-family: "Noto Sans", sans-serif;
+    color: #34495e;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    background: #F4751E;
+    height: 50px;    
+    display: flex;
+    flex-direction: row;
+    
+    align-items: center;
+}
+
+.header img {
+    height: 100%;
+    width: auto;
+    padding: 0 15px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    padding: 0 5px;
+}
+
+.list {
+    padding: 10px;
+}
+
+.listItem {
+    padding: 10px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #666;
+}
