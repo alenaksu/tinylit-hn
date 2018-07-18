@@ -1,45 +1,28 @@
 body, html {
     margin: 0;
     padding: 0;
+    font-size: 15px;
+    background-color: #f2f3f5;
+    font-family: "Noto Sans", sans-serif;
+    
 }
 
 a,
 body {
-    font-family: "Noto Sans", sans-serif;
     color: #34495e;
+    line-height: 20px;
 }
 
 a {
     text-decoration: none;
 }
 
-.header {
-    background: #F4751E;
-    height: 50px;    
-    display: flex;
-    flex-direction: row;
-    
-    align-items: center;
+a:hover {
+    color: #F4751E;
 }
 
-.header img {
-    height: 100%;
-    width: auto;
-    padding: 0 15px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: white;
-    padding: 0 5px;
-}
-
-.list {
-    padding: 10px;
-}
-
-.listItem {
-    padding: 10px 0;
-    margin: 10px 0;
-    border-bottom: 1px solid #666;
+.loading {
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10vh;
 }
