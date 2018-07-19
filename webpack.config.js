@@ -1,18 +1,20 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-function isProduction() {
-    return process.env.NODE_ENV === 'production';
-}
+const isProduction = process.env.NODE_ENV === 'production';
+const publicPath = isProduction ? '' : '';
+const outputPath = path.resolve(__dirname, path.join('dist', ''));
+const srcPath = path.resolve(__dirname, 'src');
 
-const babelRule = options => ({
+const babelRule = () => ({
     test: /\.js$/,
-
+    exclude: /(node_modules|bower_components)/,
     use: {
         loader: 'babel-loader',
-        options: merge({
-            plugins: [["transform-class-properties", { "spec": true }]],
-        }, options)
     }
 });
 
@@ -30,7 +32,7 @@ const imagesRule = () => ({
 });
 
 const esLintRule = () =>
-    !isProduction() && {
+    !isProduction && {
         enforce: 'pre',
         test: /\.js$/,
         include: pkgPath =>
@@ -38,53 +40,54 @@ const esLintRule = () =>
         loader: 'eslint-loader',
     };
 
-const publicPath = isProduction() ? 'static/' : '';
-const outputPath = path.resolve(__dirname, path.join('public', 'static'));
-const srcPath = path.resolve(__dirname, 'src');
+const cssLoader = () => ({
+    test: /\.css$/,
+    use: [
+        { loader: "style-loader" },
+        { loader: "css-loader" }
+    ]
+})
 
 const configPlugins = () => {
     let plugins = [
+        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: '',
-            // Load a custom template (lodash by default see the FAQ for details)
-            csrfToken: isProduction() ? '<?php echo json_encode($csrfToken); ?>' : '{}',
-            template: 'src/index.html',
-            filename: isProduction() ? '../../app/templates/index.phtml' : 'index.html'
+            title: 'Tiny-Lit Hacker News',
+            inlineSource: '.css$',
+            template: path.join('src', 'index.html')
         }),
-        htmlModuleScriptPlugin,
-        extractCSSPlugin,
-    ];
-
-    if (isProduction()) {
-        plugins.push(new UglifyJsPlugin());
-    } else {
-        plugins.push(new BundleAnalyzerPlugin());
-    }
+        new HtmlWebpackInlineSourcePlugin(),
+        new WorkboxPlugin.GenerateSW({
+          // these options encourage the ServiceWorkers to get in there fast
+          // and not allow any straggling "old" SWs to hang around
+          swDest: 'service-worker.js',
+          clientsClaim: true,
+          skipWaiting: true
+        }),
+        // extractCSSPlugin,
+        isProduction && new UglifyJsPlugin(),
+        // !isProduction && new BundleAnalyzerPlugin()
+    ].filter(Boolean);
 
     return plugins;
 }
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/index.js',
     module: {
         rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
+            babelRule(),
+            imagesRule(),
+            esLintRule(),
+            cssLoader()
         ]
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name].bundle.js',
+        path: outputPath
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: 'index.html'
-        })
-    ]
+    plugins: configPlugins()
 };

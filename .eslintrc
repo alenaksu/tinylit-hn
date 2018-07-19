@@ -1,0 +1,30 @@
+{
+    "parser": "babel-eslint",
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true,
+            "jsx": true
+        }
+    },
+    "rules": {
+        "no-case-declarations": 0,
+        "no-console": 0,
+        "no-cond-assign": 0,
+        "no-debugger": 1,
+        "no-constant-condition": 1,
+        "no-unused-vars": 1,
+        "brace-style": [
+            "warn",
+            "1tbs"
+        ],
+        "no-empty": 0,
+        "no-extra-boolean-cast": 0
+    }
+}

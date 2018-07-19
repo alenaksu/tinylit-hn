@@ -7,7 +7,7 @@ export default html`
     <img src=${logo} />
 
     <nav class=${styles.menu}>
-        <a href="/top">Top</a>
+        <a href="/top/0">Top</a>
         <a href="/new">New</a>
         <a href="/ask">Ask</a>
         <a href="/show">Show</a>

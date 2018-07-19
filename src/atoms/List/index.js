@@ -1,5 +1,5 @@
 import { html } from 'tiny-lit';
-import styles from './styles';
+import styles from './styles.css';
 
 const dateFormat = new Intl.DateTimeFormat().format;
 
@@ -12,10 +12,10 @@ const ListItem = (item) => html`
     <div class=${styles.meta}>
         <span class=${styles.by}>
             by <a href="#">${item.by}</a>
-        </span> | 
+        </span> |
         <span class=${styles.time}>
             ${dateFormat(new Date(item.time * 1000))}
-        </span> | 
+        </span> |
         <span class=${styles.comments}>
             <a href="#">${item.kids ? item.kids.length : '0'} comments</a>
         </span>
