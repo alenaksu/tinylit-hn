@@ -1,25 +1,45 @@
-class Route extends HTMLElement {
+function updateComponentParams(component, params) {
+    for(let key in params)
+        component[key] = params[key];
+}
+
+class RouteElement extends HTMLElement {
     static get is() {
         return 'hn-route';
     }
 
     connectedCallback() {
-        this.component = document.createElement(this.getAttribute('component'));
+        let component = document.createElement(this.getAttribute('component'));
+
+        let path = this.getAttribute('path');
 
         this.router = this.closest('hn-router').router;
-        this.router.on(this.getAttribute('path'), () => {}, {
-            after: params => {
-                debugger;
-                for(let key in params) {
-                    this.component[key] = params[key];
-                }
-                this.appendChild(this.component);
+        this.router.on(path, {
+            onEnter: params => {
+                updateComponentParams(
+                    component,
+                    params
+                );
+
+                this.appendChild(component);
+
+                component.onRouteEnter && component.onRouteEnter();
             },
-            leave: () => {
-                this.removeChild(this.component);
+            onUpdate: params => {
+                updateComponentParams(
+                    component,
+                    params
+                );
+
+                component.onRouteUpdate && component.onRouteUpdate();
+            },
+            onLeave: () => {
+                this.removeChild(component);
+
+                component.onRouteLeave && component.onRouteLeave();
             }
-        })
+        });
     }
 }
 
-customElements.define(Route.is, Route);
+customElements.define(RouteElement.is, RouteElement);

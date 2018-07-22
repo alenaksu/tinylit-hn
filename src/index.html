@@ -16,10 +16,79 @@
     <meta name="theme-color" content="#F4751E">
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./atoms/Header/styles.css" /> -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-size: 15px;
+            background-color: #f2f3f5;
+            font-family: "Noto Sans", sans-serif;
+
+        }
+
+        body {
+            padding-bottom: 20px;
+        }
+
+        a,
+        body {
+            color: #34495e;
+            line-height: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #F4751E;
+        }
+
+        .header {
+            background: #F4751E;
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+
+            align-items: center;
+        }
+
+        .header img {
+            height: 100%;
+            width: auto;
+            padding: 0 15px;
+        }
+
+        .menu a:hover,
+        .menu a:active,
+        .menu a {
+            text-decoration: none;
+            color: white;
+            padding: 0 5px;
+        }
+    </style>
 </head>
 
 <body>
-    <hn-app></hn-app>
+    <main>
+        <header class="header">
+            <img src="static/app-logo.png" />
+
+            <nav class="menu">
+                <a href="/top">Top</a>
+                <a href="/new">New</a>
+                <a href="/ask">Ask</a>
+                <a href="/show">Show</a>
+                <a href="/jobs">Jobs</a>
+            </nav>
+        </header>
+
+        <hn-router>
+            <hn-route path="/:type/:page" component="hn-feed"></hn-route>
+            <hn-route path="*" component="h1"></hn-route>
+        </hn-router>
+    </main>
 
     <script src="./index.js"></script>
 
