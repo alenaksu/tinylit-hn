@@ -1,7 +1,22 @@
 import createHistory from 'history/createBrowserHistory';
 
-const ParamsRegex = /(?<isParam>\/:(?<name>\w+)(?<optional>\?)?)|(?:\/(?<isList>{(?<values>[\w,]+)}))/g;
+const ParamsRegex = /(?:\/:(?<name>\w+)(?:(?<hasList>{(?<values>[\w,]+)}))?(?<optional>\?)?)/g;
 
+/**
+ * Valid paths:
+ * Required
+ * /:param
+ *
+ * Optional
+ * /:param?
+ *
+ * Required matching list
+ * /:param{test1,test2}
+ *
+ * Optional matching list
+ * /:param{test1,test2}?
+ * @param {*} path
+ */
 function pathToRegex(path) {
     let m, pattern = path;
 
@@ -10,11 +25,11 @@ function pathToRegex(path) {
     }
 
     while(m = ParamsRegex.exec(path)) {
-        if (m.groups.isParam) {
-            pattern = pattern.replace(m[0], `(?:\\/(?<${m.groups.name}>[^/]+))${m.groups.optional ? '?' : ''}`);
-        } else if(m.groups.isList) {
-            pattern = pattern.replace(m[0], `(?:\\/(${m.groups.values.split(',').join('|')}))`);
-        }
+        let paramRegex = m.groups.hasList
+            ? `${m.groups.values.split(',').join('|')}`
+            : '[^/]+';
+
+        pattern = pattern.replace(m[0], `(?:\\/(?<${m.groups.name}>${paramRegex}))${m.groups.optional ? '?' : ''}`);
     }
 
     return new RegExp(`^${pattern}$`);
