@@ -43,8 +43,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "start": "yarn run clean && parcel src/index.html",
-    "build": "yarn run clean && parcel build src/index.html",
+    "build": "yarn run clean && parcel build src/index.html --no-source-maps --no-cache",
     "prod-test": "yarn run clean && parcel build src/index.html && yarn sw && http-server dist",
+    "deploy": "yarn build && yarn sw && firebase deploy",
     "sw": "sw-precache --root=dist"
   },
   "lint-staged": {

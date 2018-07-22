@@ -1,12 +1,12 @@
 import { html } from 'tiny-lit';
-import styles from './styles.css';
+import './styles.css';
 
 const dateFormat = new Intl.DateTimeFormat().format;
 
 const ListItem = (item) => html`
 <div class="listItem">
     <span class="score">${item.score}</span>
-    <a class="link" href=${item.url} target="_blank">
+    <a class="link" href=${item.url} rel="noopener" target="_blank">
         <span>${item.title}</span>
     </a>
     <div class="meta">

@@ -53,7 +53,7 @@ class FeedElement extends Element {
                     : html`
                         ${List(items)}
                         <nav class="pagination">
-                            <a href=${`${this.type}/${Number(this.page || 0) + 1}`}>More...</a>
+                            <a href=${`/${this.type}/${Number(this.page || 0) + 1}`}>More...</a>
                         </nav>
                     `
 

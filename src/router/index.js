@@ -1,6 +1,6 @@
 import createHistory from 'history/createBrowserHistory';
 
-const ParamsRegex = /\/:(?<name>\w+)/g;
+const ParamsRegex = /(?<isParam>\/:(?<name>\w+)(?<optional>\?)?)|(?:\/(?<isList>{(?<values>[\w,]+)}))/g;
 
 function pathToRegex(path) {
     let m, pattern = path;
@@ -10,10 +10,14 @@ function pathToRegex(path) {
     }
 
     while(m = ParamsRegex.exec(path)) {
-        pattern = pattern.replace(m[0], `(?:/(?<${m.groups.name}>[^/]+))?`);
+        if (m.groups.isParam) {
+            pattern = pattern.replace(m[0], `(?:\\/(?<${m.groups.name}>[^/]+))${m.groups.optional ? '?' : ''}`);
+        } else if(m.groups.isList) {
+            pattern = pattern.replace(m[0], `(?:\\/(${m.groups.values.split(',').join('|')}))`);
+        }
     }
 
-    return new RegExp(pattern);
+    return new RegExp(`^${pattern}$`);
 }
 
 export class Router {
