@@ -5,7 +5,7 @@ const dateFormat = new Intl.DateTimeFormat().format;
 
 const ListItem = (item) => html`
 <div class="listItem">
-    <span class="score">${item.score}</span>
+    <span class="score">${item.points}</span>
     <a class="link" href=${item.url} rel="noopener" target="_blank">
         <span>${item.title}</span>
     </a>

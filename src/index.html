@@ -76,8 +76,8 @@
             <img src="static/app-logo.png" />
 
             <nav class="menu">
-                <a href="/top">Top</a>
-                <a href="/new">New</a>
+                <a href="/news">Top</a>
+                <a href="/newest">New</a>
                 <a href="/ask">Ask</a>
                 <a href="/show">Show</a>
                 <a href="/jobs">Jobs</a>
@@ -86,7 +86,7 @@
 
         <hn-router>
             <hn-route path="/" component="hn-feed"></hn-route>
-            <hn-route path="/:type{top,new,ask,job,show}/:page?" component="hn-feed"></hn-route>
+            <hn-route path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
             <hn-route path="*" component="hn-404"></hn-route>
         </hn-router>
     </main>

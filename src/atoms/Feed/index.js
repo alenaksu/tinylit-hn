@@ -8,13 +8,8 @@ class FeedElement extends Element {
         return 'hn-feed';
     }
 
-    get properties() {
-        return {
-            type: 'top',
-            page: 0
-        }
-    }
-
+    type = 'news';
+    page = 0;
     state = {
         items : [],
         loading: false
@@ -24,14 +19,11 @@ class FeedElement extends Element {
     fetch() {
         this.setState({ loading: true });
 
-        api.list(this.type || 'top', this.page)
-            .then(items =>
-                Promise.all(items.map(api.get))
-                    .then(items => this.setState({
-                        items: items.filter(Boolean).sort((a, b) => b.time - a.time),
-                        loading: false
-                    })
-                )
+        api.list(this.type || 'news', this.page)
+            .then(items => this.setState({
+                items: items.filter(Boolean).sort((a, b) => b.time - a.time),
+                loading: false
+            })
         );
     }
 
