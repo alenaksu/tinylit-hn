@@ -9,11 +9,8 @@ function apiCall(path) {
         })
 }
 
-function list(type, page = 0, itemsPerPage = 30) {
-    let from = itemsPerPage * page,
-        to = from + itemsPerPage;
-
-    return apiCall(`${type}/${page + 1}.json`).then(items => Promise.resolve(items.slice(from, to)));
+function list(type, page = 0) {
+    return apiCall(`${type}/${page + 1}.json`);
 }
 
 function get(id) {

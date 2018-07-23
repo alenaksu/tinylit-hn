@@ -19,7 +19,7 @@ class FeedElement extends Element {
     fetch() {
         this.setState({ loading: true });
 
-        api.list(this.type || 'news', this.page)
+        api.list(this.type || 'news', Number(this.page || 0))
             .then(items => this.setState({
                 items: items.filter(Boolean).sort((a, b) => b.time - a.time),
                 loading: false
