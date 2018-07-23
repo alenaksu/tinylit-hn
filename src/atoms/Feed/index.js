@@ -1,7 +1,8 @@
 import { html, Element } from 'tiny-lit';
 import api from '../../api';
 import List from '../List';
-import styles from './styles';
+import Loading from '../Loading';
+import './styles';
 
 class FeedElement extends Element {
     static get is() {
@@ -17,14 +18,18 @@ class FeedElement extends Element {
 
 
     fetch() {
-        this.setState({ loading: true });
+        let request = setTimeout(() =>
+            this.setState({ loading: true }),
+        500);
 
         api.list(this.type || 'news', Number(this.page || 0))
-            .then(items => this.setState({
-                items: items.filter(Boolean).sort((a, b) => b.time - a.time),
-                loading: false
-            })
-        );
+            .then(items =>  {
+                clearTimeout(request);
+                this.setState({
+                    items: items.filter(Boolean).sort((a, b) => b.time - a.time),
+                    loading: false
+                });
+            });
     }
 
     onRouteUpdate() {
@@ -41,7 +46,7 @@ class FeedElement extends Element {
         return html`
             ${
                 loading
-                    ? html`<div class="loading">Loading...</div>`
+                    ? Loading()
                     : html`
                         ${List(items)}
                         <nav class="pagination">
