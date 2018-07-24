@@ -8,16 +8,17 @@ const ListItem = (item) => html`
     <span class="score">${item.points}</span>
     <a class="link" href=${item.url} rel="noopener" target="_blank">
         <span>${item.title}</span>
+        ${item.domain ? html`<span class="meta">(${item.domain})</span>` : null}
     </a>
     <div class="meta">
         <span class="by">
-            by <a href="#">${item.by}</a>
-        </span> |
+            by <a href="#">${item.user}</a>
+        </span>
         <span class="time">
-            ${dateFormat(new Date(item.time * 1000))}
+            ${item.time_ago}
         </span> |
         <span class="comments">
-            <a href="#">${item.kids ? item.kids.length : '0'} comments</a>
+            <a href="#">${item.comments_count} comments</a>
         </span>
     </div>
 </div>

@@ -26,7 +26,7 @@ class FeedElement extends Element {
             .then(items =>  {
                 clearTimeout(request);
                 this.setState({
-                    items: items.filter(Boolean).sort((a, b) => b.time - a.time),
+                    items,
                     loading: false
                 });
             });
@@ -34,6 +34,7 @@ class FeedElement extends Element {
 
     onRouteUpdate() {
         this.fetch();
+        document.scrollingElement.scrollTo(0, 0);
     }
 
     connectedCallback() {
