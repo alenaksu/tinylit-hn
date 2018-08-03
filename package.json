@@ -10,7 +10,7 @@
     "router": "^1.3.3",
     "src": "^1.1.2",
     "static": "^2.0.0",
-    "tiny-lit": "^1.3.2",
+    "tiny-lit": "^1.4.0",
     "typescript": "^2.9.2"
   },
   "devDependencies": {
@@ -30,6 +30,8 @@
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "lint-staged": "^7.2.0",
+    "minimist": "^1.2.0",
+    "parcel": "^1.9.7",
     "parcel-bundler": "^1.9.7",
     "postcss-modules": "^1.1.0",
     "prettier": "^1.13.7",
@@ -42,8 +44,8 @@
   },
   "scripts": {
     "clean": "rm -rf dist",
-    "start": "yarn run clean && parcel src/index.html",
-    "build": "yarn run clean && parcel build src/index.html --no-source-maps --no-cache",
+    "start": "yarn run clean && node scripts/build.js src/index.html -w",
+    "build": "yarn run clean && node scripts/build.js src/index.html -p",
     "prod-test": "yarn run clean && parcel build src/index.html && yarn sw && http-server dist",
     "deploy": "yarn build && yarn sw && firebase deploy",
     "sw": "sw-precache --root=dist --navigateFallback: 'index.html'"

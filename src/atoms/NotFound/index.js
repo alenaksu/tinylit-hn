@@ -4,8 +4,8 @@ import './styles.css';
 
 class NotFoundElement extends Element {
     static get is() {
- return 'hn-404'
-}
+        return 'hn-404'
+    }
 
     getTemplate() {
         return html`

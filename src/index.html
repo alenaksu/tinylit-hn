@@ -53,7 +53,7 @@
             align-items: center;
         }
 
-        .header img {
+        .logo svg {
             height: 100%;
             width: auto;
             padding: 0 15px;
@@ -67,13 +67,20 @@
             padding: 0 5px;
         }
     </style>
+    <link rel="preload" href="./index.js" as="script">
+    <link rel="preconnect" href="https://api.hnpwa.com" />
+    <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Noto+Sans" />
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" media="none" onload="this.media='all'">
 </head>
 
 <body>
     <main>
         <header class="header">
-            <img src="static/app-logo.png" />
+            <span class="logo">
+                <svg cursor="move" style="transform:none;transform-origin:50% 50% 0" version="1" viewBox="0 0 1250 1250" width="50" height="50">
+                    <path fill="#fffefe" d="M160 625V320h80v260h219l3-127 3-128h80l3 303 2 302h-90V650H240v280h-80V625zm540-1V319l47 3 46 3 100 210c54 116 104 224 111 242 9 25 10-20 7-212l-3-245h82v610h-85L897 707c-59-122-107-228-107-234 0-7-4-13-9-13s-5 16 0 38c5 20 9 126 9 235v197h-90V624z"/>
+                </svg>
+            </span>
 
             <nav class="menu">
                 <a href="/news">Top</a>
@@ -85,9 +92,9 @@
         </header>
 
         <hn-router>
-            <hn-route path="/" component="hn-feed"></hn-route>
-            <hn-route path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
-            <hn-route path="*" component="hn-404"></hn-route>
+            <hn-route module="./atoms/Feed/index.js" path="/" component="hn-feed"></hn-route>
+            <hn-route module="./atoms/Feed/index.js" path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
+            <hn-route module="./atoms/NotFound/index.js" path="*" component="hn-404"></hn-route>
         </hn-router>
     </main>
 

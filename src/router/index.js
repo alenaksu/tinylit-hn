@@ -69,6 +69,7 @@ export class Router {
             onLeave,
             onUpdate
         });
+        this.resolve();
 
         return this;
     }

@@ -1,6 +1,6 @@
 function updateComponentParams(component, params) {
     for(let key in params)
-        component[key] = params[key];
+        component.setAttribute(key, params[key]);
 }
 
 class RouteElement extends HTMLElement {
@@ -11,7 +11,10 @@ class RouteElement extends HTMLElement {
     connectedCallback() {
         let component = document.createElement(this.getAttribute('component'));
 
-        let path = this.getAttribute('path');
+        const path = this.getAttribute('path'),
+            module = this.getAttribute('module');
+
+        module && import(module);
 
         this.router = this.closest('hn-router').router;
         this.router.on(path, {

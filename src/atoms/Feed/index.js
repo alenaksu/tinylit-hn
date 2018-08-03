@@ -10,19 +10,30 @@ class FeedElement extends Element {
     }
 
     type = 'news';
-    page = 0;
+    page = 1;
     state = {
         items : [],
         loading: false
     };
 
+    constructor() {
+        super();
+        console.log("pippo");
+    }
+
+    static get properties() {
+        return {
+            page: Number,
+            type: String
+        }
+    }
 
     fetch() {
         let request = setTimeout(() =>
             this.setState({ loading: true }),
         500);
 
-        api.list(this.type || 'news', Number(this.page || 0))
+        api.feed.list(this.type || 'news', this.page || 1)
             .then(items =>  {
                 clearTimeout(request);
                 this.setState({
@@ -51,7 +62,7 @@ class FeedElement extends Element {
                     : html`
                         ${List(items)}
                         <nav class="pagination">
-                            <a href=${`/${this.type}/${Number(this.page || 0) + 1}`}>More...</a>
+                            <a href=${`/${this.type}/${(this.page || 1) + 1}`}>More...</a>
                         </nav>
                     `
 
@@ -59,5 +70,4 @@ class FeedElement extends Element {
         `;
     }
 }
-
 customElements.define(FeedElement.is, FeedElement);
