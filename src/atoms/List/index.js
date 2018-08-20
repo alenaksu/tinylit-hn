@@ -1,8 +1,6 @@
 import { html } from 'tiny-lit';
 import './styles.css';
 
-const dateFormat = new Intl.DateTimeFormat().format;
-
 const ListItem = (item) => html`
 <div class="listItem">
     <span class="score">${item.points}</span>
