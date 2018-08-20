@@ -7,7 +7,7 @@ export const Prefs = {
 export function get(key, defaultValue = null) {
     let value = JSON.parse(localStorage.getItem(`${PREFIX}:${key}`));
 
-    if (value !== null && value.expire < Date.now()) {
+    if (value !== null && Number.isInteger(value.expire) && value.expire > Date.now()) {
         return value.data;
     }
 
@@ -18,7 +18,7 @@ export function set(key, value, expire = 0) {
     localStorage.setItem(
         `${PREFIX}:${key}`,
         JSON.stringify({
-            expire: expire && Date.now(),
+            expire: expire && (Date.now() + expire),
             data: value,
         })
     );
