@@ -2,7 +2,7 @@ import storage from '../lib/storage';
 
 const API_URL = 'https://api.hnpwa.com';
 const VERSION = 'v0';
-const EXPIRE = 60 * 60 * 1000;
+const EXPIRE = 15 * 60 * 1000;
 
 export function apiCall(path, useCache = true) {
     const url = `${API_URL}/${VERSION}/${path}`;

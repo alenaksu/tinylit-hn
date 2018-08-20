@@ -16,11 +16,6 @@ class FeedElement extends Element {
         loading: false
     };
 
-    constructor() {
-        super();
-        console.log("pippo");
-    }
-
     static get properties() {
         return {
             page: Number,
