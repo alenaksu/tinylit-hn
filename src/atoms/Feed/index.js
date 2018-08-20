@@ -60,6 +60,8 @@ class FeedElement extends Element {
     }
 
     fetch() {
+        if (Number.isNaN(this.page)) this.page = 0;
+
         let request = setTimeout(() =>
             this.setState({ loading: true }),
         500);
@@ -80,7 +82,6 @@ class FeedElement extends Element {
     }
 
     connectedCallback() {
-        if (Number.isNaN(this.page)) this.page = 0;
         this.fetch();
     }
 
