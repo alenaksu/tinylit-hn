@@ -5,7 +5,7 @@ export function list(type, page = 0) {
 }
 
 export function get(id) {
-    return apiCall(`item/${id}`);
+    return apiCall(`item/${id}.json`);
 }
 
 export default {

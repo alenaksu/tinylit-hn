@@ -1,6 +1,6 @@
 import createHistory from 'history/createBrowserHistory';
 
-const ParamsRegex = /(?:\/:(?<name>\w+)(?:(?<hasList>{(?<values>[\w,]+)}))?(?<optional>\?)?)/g;
+const ParamsRegex = /(?:\/:(?<name>[\w]+)(?:(?<hasList>{(?<values>[\w,]+)}))?(?<optional>\?)?)/g;
 
 /**
  * Valid paths:

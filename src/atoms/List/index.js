@@ -16,7 +16,7 @@ const ListItem = (item) => html`
             ${item.time_ago}
         </span> |
         <span class="comments">
-            <a href="#">${item.comments_count} comments</a>
+            <a href=${`/item/${item.id}`}>${item.comments_count} comments</a>
         </span>
     </div>
 </div>

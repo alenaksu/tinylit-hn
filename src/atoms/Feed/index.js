@@ -64,7 +64,7 @@ class FeedElement extends Element {
 
         let request = setTimeout(() =>
             this.setState({ loading: true }),
-        500);
+        0);
 
         api.feed.list(this.type, this.page)
             .then(items =>  {
@@ -83,6 +83,10 @@ class FeedElement extends Element {
 
     connectedCallback() {
         this.fetch();
+    }
+
+    disconnectedCallback() {
+        this.setState({ items: [] });
     }
 
     getTemplate() {

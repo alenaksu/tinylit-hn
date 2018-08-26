@@ -94,6 +94,7 @@
         <hn-router>
             <hn-route module="./atoms/Feed/index.js" path="/" component="hn-feed"></hn-route>
             <hn-route module="./atoms/Feed/index.js" path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
+            <hn-route module="./atoms/Item/index.js" path="/item/:itemid" component="hn-item"></hn-route>
             <hn-route module="./atoms/NotFound/index.js" path="*" component="hn-404"></hn-route>
         </hn-router>
     </main>
