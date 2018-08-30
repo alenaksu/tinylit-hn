@@ -85,10 +85,6 @@ class FeedElement extends Element {
         this.fetch();
     }
 
-    disconnectedCallback() {
-        this.setState({ items: [] });
-    }
-
     getTemplate() {
         const { items, loading } = this.state;
         const { type, page } = this;
