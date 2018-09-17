@@ -20,7 +20,7 @@
     line-height: 20px;
 }
 
-.meta { 
+.meta {
     font-size: .85em;
     color: #828282;
 }
@@ -35,4 +35,8 @@
     width: 80px;
     text-align: center;
     margin-top: -10px;
+}
+
+.link:visited {
+    color: #898989!important
 }

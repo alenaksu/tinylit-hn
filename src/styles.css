@@ -20,3 +20,7 @@ a {
 a:hover {
     color: #F4751E;
 }
+
+a:visited {
+    opacity: 0.5;
+}
