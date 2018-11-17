@@ -1,4 +1,4 @@
-import { html } from 'tiny-lit';
+import { html } from '@tiny-lit/core';
 import './styles.css';
 
 export default () => html`

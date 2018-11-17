@@ -1,5 +1,6 @@
 import styles from './styles.css';
-import { html, Element } from 'tiny-lit';
+import { html } from '@tiny-lit/core';
+import { Element } from '@tiny-lit/element';
 import api from '../../api';
 import Loading from '../Loading';
 
@@ -34,7 +35,7 @@ class ItemElement extends Element {
     }
 
     state = {
-        loading: false
+        loading: true
     }
 
     fetch() {
@@ -52,20 +53,22 @@ class ItemElement extends Element {
             });
     }
 
-    onRouteUpdate() {
-        this.fetch();
-        document.scrollingElement.scrollTo(0, 0);
+    onRouteEnter(params) {
+        this.onRouteUpdate(params);
     }
 
-    connectedCallback() {
+    onRouteUpdate(params) {
+        this.itemid = params.itemid;
+
         this.fetch();
+        document.scrollingElement.scrollTo(0, 0);
     }
 
     disconnectedCallback() {
         this.setState({ item: {} });
     }
 
-    getTemplate() {
+    render() {
         const { item, loading } = this.state;
 
         return html`

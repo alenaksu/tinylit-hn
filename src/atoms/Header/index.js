@@ -1,6 +1,6 @@
 import logo from '../../static/app-logo.png';
 import styles from './styles.css';
-import { html } from 'tiny-lit';
+import { html } from '@tiny-lit/core';
 
 export default html`
 <header class=${styles.header}>

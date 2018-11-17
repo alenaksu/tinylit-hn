@@ -91,23 +91,25 @@
             </nav>
         </header>
 
-        <hn-router>
-            <hn-route module="./atoms/Feed/index.js" path="/" component="hn-feed"></hn-route>
-            <hn-route module="./atoms/Feed/index.js" path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
-            <hn-route module="./atoms/Item/index.js" path="/item/:itemid" component="hn-item"></hn-route>
-            <hn-route module="./atoms/NotFound/index.js" path="*" component="hn-404"></hn-route>
-        </hn-router>
+
+        <hn-route module="./atoms/Feed/index.js" path="/" component="hn-feed"></hn-route>
+        <hn-route module="./atoms/Feed/index.js" path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
+        <hn-route module="./atoms/Item/index.js" path="/item/:itemid" component="hn-item"></hn-route>
+        <hn-route module="./atoms/NotFound/index.js" path="*" component="hn-404"></hn-route>
     </main>
 
     <script src="./index.js"></script>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
+    <script data-parcel="false">
+        var sw = navigator.serviceWorker;
+        if (sw) {
+            sw
                 .register('service-worker.js')
                 .then(function () { console.log("Service Worker Registered"); });
         }
     </script>
+
+    <hn-router intercept-locals></hn-router>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
-import { Element, html } from 'tiny-lit';
+import { html } from '@tiny-lit/core';
+import { Element } from '@tiny-lit/element';
 import image404 from '../../static/404.png';
 import './styles.css';
 
@@ -7,7 +8,7 @@ class NotFoundElement extends Element {
         return 'hn-404'
     }
 
-    getTemplate() {
+    render() {
         return html`
             <img src=${image404} class="img404" />
         `

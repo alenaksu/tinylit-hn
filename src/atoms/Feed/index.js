@@ -1,4 +1,5 @@
-import { html, Element } from 'tiny-lit';
+import { html } from '@tiny-lit/core';
+import { Element } from '@tiny-lit/element';
 import api from '../../api';
 import List from '../List';
 import Loading from '../Loading';
@@ -49,7 +50,7 @@ class FeedElement extends Element {
     page = 0;
     state = {
         items : [],
-        loading: false
+        loading: true
     };
 
     static get properties() {
@@ -59,9 +60,11 @@ class FeedElement extends Element {
         }
     }
 
-    fetch() {
-        if (Number.isNaN(this.page)) this.page = 0;
+    onRouteEnter(params = {}) {
+        this.onRouteUpdate(params);
+    }
 
+    fetch() {
         let request = setTimeout(() =>
             this.setState({ loading: true }),
         0);
@@ -76,16 +79,14 @@ class FeedElement extends Element {
             });
     }
 
-    onRouteUpdate() {
+    onRouteUpdate(params = {}) {
+        this.page = params.page || 0;
+        this.type = params.type || 'news';
         this.fetch();
         document.scrollingElement.scrollTo(0, 0);
     }
 
-    connectedCallback() {
-        this.fetch();
-    }
-
-    getTemplate() {
+    render() {
         const { items, loading } = this.state;
         const { type, page } = this;
 
