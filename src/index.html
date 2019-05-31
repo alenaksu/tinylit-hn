@@ -1,115 +1,147 @@
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tiny-Lit Hacker News</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiny-Lit Hacker News</title>
+        <link rel="icon" href="./static/favicon.ico" />
 
-    <link rel="icon" href="./static/favicon.ico">
+        <!-- Web Application Manifest -->
+        <link rel="manifest" href="./static/manifest.webmanifest" />
 
-    <!-- Web Application Manifest -->
-    <link rel="manifest" href="./static/manifest.webmanifest">
+        <!-- Color the status bar on mobile devices -->
+        <meta name="theme-color" content="#F4751E" />
 
-    <!-- Color the status bar on mobile devices -->
-    <meta name="theme-color" content="#F4751E">
+        <!-- <link rel="stylesheet" href="./atoms/Header/styles.css" /> -->
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                font-size: 15px;
+                background-color: #f2f3f5;
+                font-family: 'Noto Sans', sans-serif;
+            }
 
-    <!-- <link rel="stylesheet" href="./atoms/Header/styles.css" /> -->
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-size: 15px;
-            background-color: #f2f3f5;
-            font-family: "Noto Sans", sans-serif;
+            body {
+                padding-bottom: 20px;
+            }
 
-        }
+            a,
+            body {
+                color: #34495e;
+                line-height: 20px;
+            }
 
-        body {
-            padding-bottom: 20px;
-        }
+            a {
+                text-decoration: none;
+            }
 
-        a,
-        body {
-            color: #34495e;
-            line-height: 20px;
-        }
+            a:hover {
+                color: #f4751e;
+            }
 
-        a {
-            text-decoration: none;
-        }
+            .header {
+                background: #f4751e;
+                height: 50px;
+                display: flex;
+                flex-direction: row;
 
-        a:hover {
-            color: #F4751E;
-        }
+                align-items: center;
+            }
 
-        .header {
-            background: #F4751E;
-            height: 50px;
-            display: flex;
-            flex-direction: row;
+            .logo svg {
+                height: 100%;
+                width: auto;
+                padding: 0 15px;
+            }
 
-            align-items: center;
-        }
+            .menu a:hover,
+            .menu a:active,
+            .menu a {
+                text-decoration: none;
+                color: white;
+                padding: 0 5px;
+            }
+        </style>
+        <link rel="preload" href="./index.js" as="script" />
+        <link rel="preconnect" href="https://api.hnpwa.com" />
+        <link
+            rel="prefetch"
+            href="https://fonts.googleapis.com/css?family=Noto+Sans"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Noto+Sans"
+            rel="stylesheet"
+            media="none"
+            onload="this.media='all'"
+        />
+        <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    </head>
 
-        .logo svg {
-            height: 100%;
-            width: auto;
-            padding: 0 15px;
-        }
+    <body>
+        <main>
+            <header class="header">
+                <span class="logo">
+                    <svg
+                        cursor="move"
+                        style="transform:none;transform-origin:50% 50% 0"
+                        version="1"
+                        viewBox="0 0 1250 1250"
+                        width="50"
+                        height="50"
+                    >
+                        <path
+                            fill="#fffefe"
+                            d="M160 625V320h80v260h219l3-127 3-128h80l3 303 2 302h-90V650H240v280h-80V625zm540-1V319l47 3 46 3 100 210c54 116 104 224 111 242 9 25 10-20 7-212l-3-245h82v610h-85L897 707c-59-122-107-228-107-234 0-7-4-13-9-13s-5 16 0 38c5 20 9 126 9 235v197h-90V624z"
+                        />
+                    </svg>
+                </span>
 
-        .menu a:hover,
-        .menu a:active,
-        .menu a {
-            text-decoration: none;
-            color: white;
-            padding: 0 5px;
-        }
-    </style>
-    <link rel="preload" href="./index.js" as="script">
-    <link rel="preconnect" href="https://api.hnpwa.com" />
-    <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Noto+Sans" />
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet" media="none" onload="this.media='all'">
-</head>
+                <nav class="menu">
+                    <a href="/news">Top</a>
+                    <a href="/newest">New</a>
+                    <a href="/ask">Ask</a>
+                    <a href="/show">Show</a>
+                    <a href="/favorites">Favorites</a>
+                </nav>
+            </header>
 
-<body>
-    <main>
-        <header class="header">
-            <span class="logo">
-                <svg cursor="move" style="transform:none;transform-origin:50% 50% 0" version="1" viewBox="0 0 1250 1250" width="50" height="50">
-                    <path fill="#fffefe" d="M160 625V320h80v260h219l3-127 3-128h80l3 303 2 302h-90V650H240v280h-80V625zm540-1V319l47 3 46 3 100 210c54 116 104 224 111 242 9 25 10-20 7-212l-3-245h82v610h-85L897 707c-59-122-107-228-107-234 0-7-4-13-9-13s-5 16 0 38c5 20 9 126 9 235v197h-90V624z"/>
-                </svg>
-            </span>
+            <hn-route
+                module="./atoms/Feed/index.js"
+                path="/"
+                component="hn-feed"
+            ></hn-route>
+            <hn-route
+                module="./atoms/Feed/index.js"
+                path="/:type{news,newest,ask,favorites,show}/:page?"
+                component="hn-feed"
+            ></hn-route>
+            <hn-route
+                module="./atoms/Item/index.js"
+                path="/item/:itemid"
+                component="hn-item"
+            ></hn-route>
+            <hn-route
+                module="./atoms/NotFound/index.js"
+                path="*"
+                component="hn-404"
+            ></hn-route>
+        </main>
 
-            <nav class="menu">
-                <a href="/news">Top</a>
-                <a href="/newest">New</a>
-                <a href="/ask">Ask</a>
-                <a href="/show">Show</a>
-                <a href="/jobs">Jobs</a>
-            </nav>
-        </header>
+        <script src="./index.js"></script>
 
+        <script data-parcel="false">
+            var sw = navigator.serviceWorker;
+            if (sw) {
+                sw.register('service-worker.js').then(function() {
+                    console.log('Service Worker Registered');
+                });
+            }
+        </script>
 
-        <hn-route module="./atoms/Feed/index.js" path="/" component="hn-feed"></hn-route>
-        <hn-route module="./atoms/Feed/index.js" path="/:type{news,newest,ask,job,show}/:page?" component="hn-feed"></hn-route>
-        <hn-route module="./atoms/Item/index.js" path="/item/:itemid" component="hn-item"></hn-route>
-        <hn-route module="./atoms/NotFound/index.js" path="*" component="hn-404"></hn-route>
-    </main>
-
-    <script src="./index.js"></script>
-
-    <script data-parcel="false">
-        var sw = navigator.serviceWorker;
-        if (sw) {
-            sw
-                .register('service-worker.js')
-                .then(function () { console.log("Service Worker Registered"); });
-        }
-    </script>
-
-    <hn-router intercept-locals></hn-router>
-</body>
-
+        <hn-router intercept-locals></hn-router>
+    </body>
 </html>

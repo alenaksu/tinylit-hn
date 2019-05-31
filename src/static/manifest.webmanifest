@@ -6,11 +6,13 @@
   "background_color": "#FFFFFF",
   "start_url": "/",
   "display": "standalone",
+  "android_package_name": "app.tinylit-hn.androidapp",
   "icons": [
       {
           "src": "logo.png",
           "type": "image/png",
-          "sizes": "512x512"
+          "sizes": "512x512",
+          "purpose": "any"
       }
   ]
 }
