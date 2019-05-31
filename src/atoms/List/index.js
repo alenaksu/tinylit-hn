@@ -6,7 +6,7 @@ const ListItem = ({ item, onFavoriteToggle, favorite }) =>
     html`
         <div class="listItem">
             <span class="score">${item.points}</span>
-            <div>
+            <div class="content">
                 <a class="link" href=${item.url} rel="noopener" target="_blank">
                     <span>${item.title}</span>
                     ${item.domain

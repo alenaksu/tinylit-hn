@@ -19,6 +19,10 @@
     border-bottom: 1px solid #eee;
 }
 
+.content {
+    flex: 1 0 auto;
+}
+
 .title {
     font-size: 15px;
     line-height: 20px;
