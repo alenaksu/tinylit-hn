@@ -34,15 +34,14 @@
     "http-server": "^0.11.1",
     "lint-staged": "^8.1.7",
     "minimist": "^1.2.0",
-    "parcel": "^1.9.7",
-    "parcel-bundler": "^1.10.3",
+    "parcel-bundler": "^1.12.3",
     "postcss-modules": "^1.1.0",
     "prettier": "^1.13.7",
     "style-loader": "^0.23.1",
-    "sw-precache": "^5.2.1",
     "webpack": "^4.16.1",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.1.0",
+    "workbox-cli": "^4.3.1",
     "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
@@ -51,7 +50,7 @@
     "build": "npm run clean && node scripts/build.js src/index.html -p",
     "prod-test": "npm run clean && parcel build src/index.html && npm run sw && http-server dist",
     "deploy": "npm run build && npm run sw && firebase deploy",
-    "sw": "sw-precache --root=dist --navigateFallback: 'index.html'"
+    "sw": "workbox generateSW"
   },
   "lint-staged": {
     "*.scss": [

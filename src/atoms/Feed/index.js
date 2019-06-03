@@ -1,11 +1,10 @@
+import './styles';
 import { html } from '@tiny-lit/core';
 import { Element } from '@tiny-lit/element';
 import api from '../../api';
 import List from '../List';
 import Loading from '../Loading';
-import './styles';
 import cn from '../../lib/classNames';
-import { withStore } from '@tiny-lit/store';
 import store from '../../lib/store';
 
 const PAGE_COUNT = {
@@ -46,7 +45,7 @@ const Pagination = (type, page) => html`
     </nav>
 `;
 
-class FeedElement extends withStore(Element) {
+class FeedElement extends Element {
     static get is() {
         return 'hn-feed';
     }

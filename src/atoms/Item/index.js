@@ -1,4 +1,4 @@
-import styles from './styles.css';
+import './styles.css';
 import { html } from '@tiny-lit/core';
 import { Element } from '@tiny-lit/element';
 import api from '../../api';

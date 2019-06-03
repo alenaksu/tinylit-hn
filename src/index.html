@@ -9,7 +9,7 @@
         <link rel="icon" href="./static/favicon.ico" />
 
         <!-- Web Application Manifest -->
-        <link rel="manifest" href="./static/manifest.webmanifest" />
+        <link rel="manifest" href="./manifest.webmanifest" />
 
         <!-- Color the status bar on mobile devices -->
         <meta name="theme-color" content="#F4751E" />
@@ -66,19 +66,18 @@
                 padding: 0 5px;
             }
         </style>
-        <link rel="preload" href="./index.js" as="script" />
+        <link rel="preload" href="./index.js" as="script" data-entry />
         <link rel="preconnect" href="https://api.hnpwa.com" />
         <link
-            rel="prefetch"
-            href="https://fonts.googleapis.com/css?family=Noto+Sans"
-        />
-        <link
-            href="https://fonts.googleapis.com/css?family=Noto+Sans"
+            href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap"
             rel="stylesheet"
             media="none"
             onload="this.media='all'"
         />
-        <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+        <script
+            src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"
+            defer
+        ></script>
     </head>
 
     <body>
@@ -131,12 +130,16 @@
             ></hn-route>
         </main>
 
-        <script src="./index.js"></script>
+        <script type="module">
+            WebComponents.waitFor(() =>
+                import(document.querySelector('[data-entry]').getAttribute('href'))
+            );
+        </script>
 
         <script data-parcel="false">
             var sw = navigator.serviceWorker;
             if (sw) {
-                sw.register('service-worker.js').then(function() {
+                sw.register('sw.js').then(function() {
                     console.log('Service Worker Registered');
                 });
             }
