@@ -1,18 +1,11 @@
 {
-    "presets": [
-        ["env", {
-            "targets": {
-                "browsers": ["last 5 chrome versions"]
-            }
-        }]
-    ],
+    "presets": ["@babel/preset-modules"],
     "plugins": [
-        ["@babel/plugin-proposal-object-rest-spread"],
-        ["@babel/plugin-proposal-class-properties",
+        [
+            "@babel/plugin-proposal-class-properties",
             {
                 "loose": true
             }
-        ],
-        ["@babel/syntax-dynamic-import"]
+        ]
     ]
 }

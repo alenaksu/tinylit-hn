@@ -1,6 +1,6 @@
 import './styles';
 import { html } from '@tiny-lit/core';
-import { Element } from '@tiny-lit/element';
+import { Element as TinyElement } from '@tiny-lit/element';
 import api from '../../api';
 import List from '../List';
 import Loading from '../Loading';
@@ -45,7 +45,7 @@ const Pagination = (type, page) => html`
     </nav>
 `;
 
-class FeedElement extends Element {
+class FeedElement extends TinyElement {
     static get is() {
         return 'hn-feed';
     }
@@ -96,7 +96,7 @@ class FeedElement extends Element {
     }
 
     onRouteUpdate(params = {}) {
-        this.page = params.page || 0;
+        this.page = Number(params.page || 0);
         this.type = params.type || 'news';
 
         this.fetch();

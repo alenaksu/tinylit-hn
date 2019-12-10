@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -66,7 +67,7 @@
                 padding: 0 5px;
             }
         </style>
-        <link rel="preload" href="./index.js" as="script" data-entry />
+        <link rel="preload" href="./index.js" as="script" />
         <link rel="preconnect" href="https://api.hnpwa.com" />
         <link
             href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap"
@@ -74,10 +75,6 @@
             media="none"
             onload="this.media='all'"
         />
-        <script
-            src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"
-            defer
-        ></script>
     </head>
 
     <body>
@@ -130,11 +127,7 @@
             ></hn-route>
         </main>
 
-        <script type="module">
-            WebComponents.waitFor(() =>
-                import(document.querySelector('[data-entry]').getAttribute('href'))
-            );
-        </script>
+        <script defer async src="./index.js"></script>
 
         <script data-parcel="false">
             var sw = navigator.serviceWorker;

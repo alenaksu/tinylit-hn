@@ -10,7 +10,8 @@ process.on('unhandledRejection', (reason, p) => {
 // manually set up the bundler
 const bundler = new Bundler(argv._[0], {
     sourceMaps: !argv.p,
-    cache: !argv.p
+    cache: !argv.p,
+    outDir: argv.d
 });
 
 bundler.addAssetType('html', require.resolve('./HTMLAsset'));
